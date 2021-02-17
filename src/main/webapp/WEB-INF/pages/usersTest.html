@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<div th:each="users : ${users}">
+    <a th:href="@{/{id}(id=${users.getId()})}" th:text="${users.getName()}">User</a>
+</div>
+<input type="button" value="Add"
+       onclick="window.location.href = 'new.html'"/>
+</body>
+</html>

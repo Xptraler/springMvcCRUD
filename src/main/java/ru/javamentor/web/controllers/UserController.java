@@ -16,7 +16,7 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController (UserService userService) {
+    public UserController(UserService userService) {
 
         this.userService = userService;
     }
@@ -25,7 +25,7 @@ public class UserController {
     public String getUsers(ModelMap model) {
         List<User> users = userService.getUsers();
         model.addAttribute("users", users);
-            return "usersTest";
+        return "usersTest";
     }
 
     @GetMapping("/new")
@@ -37,26 +37,30 @@ public class UserController {
 
     @PostMapping()
     public String createUser(@RequestParam String name, @RequestParam String surname) {
-        User user =(User)new User(name,surname);
-            userService.createUser(user);
+        User user = (User) new User(name, surname);
+        userService.createUser(user);
         return "redirect:/";
 
     }
+
     @GetMapping("/{id}")
-    public String show (@PathVariable("id") int id,Model model){
+    public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("users", userService.getUser(id));
         return "show";
     }
+
     @GetMapping("/{id}/edit")
     public String updateUser(@PathVariable("id") int id, Model model) {
-        model.addAttribute("users",userService.getUser(id));
+        model.addAttribute("users", userService.getUser(id));
         return "edit";
     }
+
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
-        userService.update(id,user);
+        userService.update(id, user);
         return "redirect:/";
     }
+
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
         userService.deleteUser(id);

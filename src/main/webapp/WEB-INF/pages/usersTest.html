@@ -6,9 +6,11 @@
 </head>
 <body>
 <div th:each="users : ${users}">
-    <a th:href="@{/{id}(id=${users.getId()})}" th:text="${users.getName()}">User</a>
+    <a th:href="@{/user/{id}(id=${users.getId()})}" th:text="${users.getName()}">User</a>
 </div>
 <input type="button" value="Add"
-       onclick="window.location.href = 'new.html'"/>
+       onclick="window.location.href = '/admin/new.html'"/>
+<br>
+<a th:href="@{/logout}">Logout</a>
 </body>
 </html>

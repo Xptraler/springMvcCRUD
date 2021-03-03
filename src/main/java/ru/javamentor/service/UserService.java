@@ -10,4 +10,5 @@ public interface UserService {
     List<User> getUsers();
     User getUser(int id);
     void update(int id, User user);
+    User getUserByUsername(String username);
 }

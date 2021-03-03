@@ -9,7 +9,7 @@ public class AppConfigInitializer extends AbstractAnnotationConfigDispatcherServ
     @Override
     protected Class<?>[] getRootConfigClasses() {
 
-        return new Class[] {WebConfig.class};
+        return null;
     }
 
     @Override

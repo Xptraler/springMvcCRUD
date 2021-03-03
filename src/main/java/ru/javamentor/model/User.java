@@ -16,24 +16,30 @@ public class User implements UserDetails {
     private long id;
     @Column(name = "name")
     private String name;
-    @Column(name = "surname")
-    private String surname;
+    @Column(name = "password")
+    private String password;
+    @ManyToMany()
+    @JoinTable(name = "user_roles",joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     public User() {
 
     }
 
-    public User(String name, String surname) {
+    public User(String name, String password) {
         this.name = name;
-        this.surname = surname;
+        this.password = password;
     }
 
-    public User(long id, String name, String surname, Set<Role> roles) {
+    public User(long id, String name, String password, Set<Role> roles) {
         this.id = id;
         this.name = name;
-        this.surname = surname;
+        this.password = password;
         this.roles = roles;
+    }
+
+    public User(String name, String surname, String role) {
     }
 
     public long getId() {
@@ -52,12 +58,9 @@ public class User implements UserDetails {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
-    }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setPassword(String surname) {
+        this.password = surname;
     }
 
     public Set<Role> getRoles() {
@@ -75,12 +78,12 @@ public class User implements UserDetails {
         User user = (User) o;
         return id == user.id &&
                 Objects.equals(name, user.name) &&
-                Objects.equals(surname, user.surname);
+                Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname);
+        return Objects.hash(id, name, password);
     }
 
     @Override
@@ -88,7 +91,7 @@ public class User implements UserDetails {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+                ", surname='" + password + '\'' +
                 '}';
     }
 
@@ -99,31 +102,31 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return name;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

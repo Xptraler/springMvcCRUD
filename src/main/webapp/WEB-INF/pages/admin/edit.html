@@ -9,10 +9,12 @@
     <label for="name">Name:</label>
     <input type="text" th:field="*{name}" id="name"/>
     <br>
-    <label for="surname">Surname:</label>
-    <input type="text" th:field="*{surname}" id="surname">
+    <label for="password">Password:</label>
+    <input type="text" th:field="*{password}" id="password"/>
     <br>
     <input type="submit" value="Update!">
+    <br>
+    <a th:href="@{/logout}">Logout</a>
 </form>
 
 </body>

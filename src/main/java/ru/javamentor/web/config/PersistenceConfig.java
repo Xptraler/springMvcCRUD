@@ -74,7 +74,7 @@ public class PersistenceConfig {
 
     Properties additionalProperties () {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto","create-drop");
+        properties.setProperty("hibernate.hbm2ddl.auto","create");
         properties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQL8Dialect");
         properties.setProperty("hibernate.show_sql", showSQL);
         return properties;

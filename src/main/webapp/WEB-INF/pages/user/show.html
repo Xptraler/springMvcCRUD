@@ -6,11 +6,14 @@
 </head>
 <body>
 <p th:text="${users.getName()}">VALUE</p>
-<p th:text="${users.getSurname()}">VALUE</p>
 
-<a th:href="@{/{id}/edit(id=${users.getId()})}">Edit</a>
+<p th:text="${users.getPassword()}">VALUE</p>
 
-<form th:method="DELETE" th:action="@{/{id}(id=${users.getId()})}">
+<a th:href="@{/admin/{id}/edit(id=${users.getId()})}">Edit</a>
+<a th:href="@{/logout}">Logout</a>
+
+
+<form th:method="DELETE" th:action="@{/admin/{id}(id=${users.getId()})}">
     <input type="submit" value="Delete"/>
 </form>
 </body>

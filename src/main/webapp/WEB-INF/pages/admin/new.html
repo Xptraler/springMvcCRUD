@@ -11,9 +11,11 @@
     <form:hidden path="id"/>
     name: <input type = "text" name="name"/>
     <br>
-    surname: <input type = "text" name="surname"/>
+    password: <input type = "text" name="password"/>
     <br>
     <input type="submit" value="Create">
+    <br>
+    <a th:href="@{/logout}">Logout</a>
 </form>
  </body>
 </html>

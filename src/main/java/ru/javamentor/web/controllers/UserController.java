@@ -1,6 +1,5 @@
 package ru.javamentor.web.controllers;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.javamentor.model.User;
@@ -27,32 +26,39 @@ public class UserController {
         model.addAttribute("users", users);
         return "usersTest";
     }
+    @GetMapping(value = "/admin")
+    public String getUsersAdmin(ModelMap model) {
+        List<User> users = userService.getUsers();
+        model.addAttribute("users", users);
+        return "usersTest";
+    }
 
-    @GetMapping("/new")
+    @GetMapping("/admin/new")
     public String creationForm(ModelMap model) {
         model.addAttribute("user", new User());
-        return "new";
+        return "/admin/new";
 
     }
 
     @PostMapping()
-    public String createUser(@RequestParam String name, @RequestParam String surname) {
-        User user = (User) new User(name, surname);
+    public String createUser(@RequestParam String name, @RequestParam String password ) {
+        User user = (User) new User(name, password
+        );
         userService.createUser(user);
         return "redirect:/";
 
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("users", userService.getUser(id));
-        return "show";
+        return "/user/show";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("/admin/{id}/edit")
     public String updateUser(@PathVariable("id") int id, Model model) {
         model.addAttribute("users", userService.getUser(id));
-        return "edit";
+        return "/admin/edit";
     }
 
     @PatchMapping("/{id}")
@@ -61,7 +67,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/{id}")
     public String delete(@PathVariable("id") int id) {
         userService.deleteUser(id);
         return "redirect:/";
